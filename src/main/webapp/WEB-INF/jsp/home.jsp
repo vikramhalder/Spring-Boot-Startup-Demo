@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <body>
-<h2>Forms</h2>
+<h2>
+    ${msg}
+</h2>
 <form action="/api/user" method="post">
     <label for="name">Name:</label><br>
     <input type="text" id="name" name="name" value=""><br>

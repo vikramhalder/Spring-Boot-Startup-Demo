@@ -1,15 +1,14 @@
-package com.example.demo.Controller.View;
+package com.example.demo.controller.View;
 
-import com.example.demo.Config.ViewController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class ViewHomeController extends ViewController {
+public class ViewHomeController {
     @RequestMapping(path = "/")
     String home(Model model) {
-        model.addAttribute("msg", "Hello there, This is home page");
+        model.addAttribute("msg", "Hello, This is home page");
         return "home";
     }
 }
