@@ -1,1 +1,2 @@
-# spring-boot-boilerplate
+# Spring Boot Boilerplate
+##### 7. Browse  [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
