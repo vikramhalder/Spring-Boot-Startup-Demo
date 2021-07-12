@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.controller.advice;
 
 import com.example.demo.core.iservice.ApiController;
 import org.springframework.http.HttpHeaders;
@@ -11,7 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class RestExceptionHandler extends ResponseEntityExceptionHandler {
+public class SpringControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity handleExceptionInternal(Exception ex, @Nullable Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -20,10 +20,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler()
     protected ResponseEntity handleConflict(RuntimeException ex, WebRequest request) {
-        if (request.getContextPath().startsWith("/api")) {
-            return handleExceptionInternal(ex, ApiController.json(false, null, ex.getMessage()), new HttpHeaders(), HttpStatus.OK, request);
+        if ((request.getHeader("Accept") + "").contains("text/html")) {
+            return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.OK, request);
+        } else {
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.add("Content-Type", "application/json");
+            return handleExceptionInternal(ex, ApiController.json(false, null, ex.getMessage()), httpHeaders, HttpStatus.OK, request);
         }
-        return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.OK, request);
+
     }
 }
 

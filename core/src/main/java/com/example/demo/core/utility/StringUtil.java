@@ -7,7 +7,7 @@ public class StringUtil {
     public static String getObjectToJSON(Object object) {
         try {
             return new Gson().toJson(object);
-        }catch (Exception e) {
+        } catch (Exception e) {
         }
         return null;
     }

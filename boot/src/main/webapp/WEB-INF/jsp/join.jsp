@@ -1,67 +1,41 @@
 <!DOCTYPE html>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> Login Page </title>
-    <style>
-        Body {
-            font-family: Calibri, Helvetica, sans-serif;
-            background-color: white;
-        }
-
-        button {
-            background-color: #000000;
-            width: 100%;
-            color: white;
-            padding: 15px;
-            margin: 10px 0px;
-            border: none;
-            cursor: pointer;
-        }
-        input[type=text], input[type=password] {
-            width: 100%;
-            margin: 8px 0;
-            padding: 12px 20px;
-            display: inline-block;
-            border: 2px solid green;
-            box-sizing: border-box;
-        }
-
-        button:hover {
-            opacity: 0.7;
-        }
-
-        .cancelbtn {
-            width: auto;
-            padding: 10px 18px;
-            margin: 10px 5px;
-        }
-
-
-        .container {
-            padding: 25px;
-            background-color: white;
-            margin: auto;
-            width: 40%;
-            border: 3px solid #73AD21;
-        }
-    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Spring Demo</title>
+    <link rel="stylesheet" href="https://www.bootstrapdash.com/demo/connect-plus/jquery/template/assets/css/demo_1/style.css">
+    <link rel="shortcut icon" type="image/png" href="https://spring.io/images/favicon-9d25009f65637a49ac8d91eb1cf7b75e.ico"/>
 </head>
 <body>
-<center><h1>Create Account </h1></center>
-<form>
-    <div class="container">
-        <label>Name : </label>
-        <input type="text" placeholder="Enter Name" name="name" required>
-        <label>Username : </label>
-        <input type="text" placeholder="Enter Username" name="username" required>
-        <label>Password : </label>
-        <input type="password" placeholder="Enter Password" name="password" required>
-        <button type="submit">Join</button>
-        <a href="/login">Sign In</a>
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth lock-full-bg">
+            <div class="row w-100">
+                <div class="col-lg-4 mx-auto">
+                    <div class="auth-form-transparent text-left p-5 text-center">
+                        <img src="https://spring.io/images/spring-logo-9146a4d3298760c2e7e49595184e1975.svg" class="lock-profile-img" alt="img">
+                        <form class="pt-5">
+                            <div class="form-group">
+                                <label>Login to unlock</label>
+                                <input type="text" class="form-control text-left text-white mt-2" required name="name" placeholder="User Fullname">
+                                <input type="email" class="form-control text-left text-white mt-2" required name="email" placeholder="Email">
+                                <input type="text" class="form-control text-left text-white mt-2" required name="username" placeholder="Username">
+                                <input type="password" class="form-control text-left text-white mt-2" required name="password" placeholder="Password">
+                            </div>
+                            <div class="mt-2">
+                                <button class="btn btn-block btn-success btn-lg font-weight-medium" id="login">Unlock</button>
+                            </div>
+                            <br>
+                            <a href="/login" class="text-white mt-2">Sign in</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</form>
+</div>
 </body>
+</html>
 </html>

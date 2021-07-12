@@ -8,7 +8,7 @@
         <artifactId>main</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>test</artifactId>
+    <artifactId>utest</artifactId>
 
     <dependencies>
         <dependency>

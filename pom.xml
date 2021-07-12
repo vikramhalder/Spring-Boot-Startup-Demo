@@ -12,7 +12,7 @@
         <module>core</module>
         <module>boot</module>
         <module>repository</module>
-        <module>test</module>
+        <module>utest</module>
     </modules>
 
     <parent>
@@ -22,6 +22,7 @@
     </parent>
 
     <build>
+        <directory>../target/${project.artifactId}</directory>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -90,6 +91,10 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-resource-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-client</artifactId>
         </dependency>
 
         <dependency>
