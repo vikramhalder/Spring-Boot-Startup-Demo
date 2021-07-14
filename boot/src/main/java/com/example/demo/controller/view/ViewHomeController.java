@@ -1,10 +1,10 @@
 package com.example.demo.controller.view;
 
 import com.example.demo.core.service.UserService;
+import com.example.demo.entity.PrincipalUser;
 import com.example.demo.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +16,8 @@ public class ViewHomeController {
     UserService userService;
 
     @RequestMapping(path = "/")
-    String home(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("msg", String.format("Hello %s, This is home page", authentication.getName()));
+    String home(Authentication authentication, Model model) {
+        model.addAttribute("msg", String.format("Hello %s, This is home page", ((PrincipalUser) authentication.getPrincipal()).getName()));
         return "home";
     }
 

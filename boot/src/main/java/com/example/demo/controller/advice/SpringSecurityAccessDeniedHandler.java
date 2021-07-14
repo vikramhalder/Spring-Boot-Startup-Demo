@@ -1,5 +1,6 @@
 package com.example.demo.controller.advice;
 
+import com.example.demo.core.helper.RequestHelper;
 import com.example.demo.core.iservice.ApiController;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.AccessDeniedException;
@@ -17,13 +18,13 @@ public class SpringSecurityAccessDeniedHandler implements AccessDeniedHandler {
     private String redirectPath;
 
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException arg2) throws IOException, ServletException {
+    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException exception) throws IOException, ServletException {
         if ((request.getHeader("Accept") + "").contains("text/html")) {
             response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
             response.setHeader("Location", redirectPath);
         } else {
             response.setContentType("application/json");
-            response.getWriter().print(ApiController.json(false, null, "You need to login first in order to perform this action."));
+            response.getWriter().print(ApiController.json(false, null,  RequestHelper.getExceptionMessage(exception)));
         }
     }
 

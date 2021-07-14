@@ -1,5 +1,6 @@
 package com.example.demo.core.service;
 
+import com.example.demo.entity.PrincipalUser;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class UserService implements UserDetailsService {
         }
 
         if (user != null) {
-            return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority());
+            return new PrincipalUser(user);
         }
         throw new UsernameNotFoundException("Invalid username or password.");
     }

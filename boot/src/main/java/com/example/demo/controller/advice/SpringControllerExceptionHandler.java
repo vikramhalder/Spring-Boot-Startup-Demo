@@ -1,5 +1,6 @@
 package com.example.demo.controller.advice;
 
+import com.example.demo.core.helper.RequestHelper;
 import com.example.demo.core.iservice.ApiController;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ public class SpringControllerExceptionHandler extends ResponseEntityExceptionHan
         } else {
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.add("Content-Type", "application/json");
-            return handleExceptionInternal(ex, ApiController.json(false, null, ex.getMessage()), httpHeaders, HttpStatus.OK, request);
+            return handleExceptionInternal(ex, ApiController.json(false, null, RequestHelper.getExceptionMessage(ex)), httpHeaders, HttpStatus.OK, request);
         }
 
     }

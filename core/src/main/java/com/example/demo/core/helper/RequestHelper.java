@@ -28,4 +28,18 @@ public class RequestHelper {
         }
         return "";
     }
+
+    public static String getExceptionMessage(Exception ex) {
+        String temp = ex.getMessage();
+        if (temp == null) {
+
+        }
+
+        if (temp.contains("Invalid access token")) {
+            return "You need to login first in order to perform this action.";
+        } else if (temp.contains("Bad credentials")) {
+            return "Your email and password do not match. Please try again.";
+        }
+        return temp;
+    }
 }

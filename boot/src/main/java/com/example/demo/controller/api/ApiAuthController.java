@@ -2,31 +2,46 @@ package com.example.demo.controller.api;
 
 import com.example.demo.core.iservice.ApiController;
 import com.example.demo.core.service.UserService;
+import com.example.demo.entity.PrincipalUser;
 import com.example.demo.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/api/auth/")
+@ResponseBody()
+@RequestMapping("/oauth")
 public class ApiAuthController extends ApiController {
     @Autowired
     UserService userService;
+    @Autowired
+    TokenEndpoint tokenEndpoint;
 
-    @GetMapping
-    protected String getView(Model model, User user) {
-        if (user.getUsername() != null && user.getUsername().length() > 2) {
-            userService.save(user);
-        }
-        return json(true, userService.findAll(), "Success");
+    @RequestMapping(value = "/token", method = {RequestMethod.POST, RequestMethod.GET})
+    public Map getAccessToken(Principal principal, @RequestParam Map<String, String> parameters) throws HttpRequestMethodNotSupportedException {
+        ResponseEntity responseEntity = tokenEndpoint.postAccessToken(principal, parameters);
+        return json(true, responseEntity.getBody(), "Success");
     }
 
-    @PostMapping
-    protected String postView(Model model, User user) {
-        userService.save(user);
+    @RequestMapping(value = "/user/create", method = {RequestMethod.POST, RequestMethod.GET})
+    public Map postView(User user) {
+        if (user.getUsername() != null && user.getUsername().length() > 2) {
+            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+            userService.save(user);
+        }
         return json(true, user, "Success");
+    }
+
+    @GetMapping
+    public Map getView(HttpServletRequest request, Authentication authentication) {
+        return json(true, ((PrincipalUser) authentication.getPrincipal()).getMap(), "Success");
     }
 }
